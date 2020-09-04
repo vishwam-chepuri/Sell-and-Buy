@@ -1,0 +1,5 @@
+<li>
+  <%= image_tag (user.picture.url if user.picture?) ,width: '70', :class => "img-thumbnail"%>
+  <span>&nbsp</span><span>&nbsp</span><%= link_to user.name, user %>
+  
+</li> 

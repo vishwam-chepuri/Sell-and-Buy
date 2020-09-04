@@ -1,0 +1,13 @@
+<% provide(:title, "PHONE VERIFICATION") %>
+<div id="verify-pin">
+	<h3>Enter your PIN</h3>
+
+	<%= form_with url: users_verify_path , remote: true do |f| %>
+		  <%= f.hidden_field :user_id, :value => @user.id %>
+		
+		  <%= f.label :PIN %>
+		  <%= f.text_field :pin, class: 'form-control' , placeholder: "- - - -", value: nil, required: true %>
+
+		  <%= submit_tag "Verify PIN", class: "btn btn-primary" %>
+	<% end %>
+</div>

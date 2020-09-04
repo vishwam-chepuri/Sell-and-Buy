@@ -1,0 +1,38 @@
+<% provide(:title, 'Add Item') %>
+
+<%if current_user.verified %>
+	<h1>Add an Item</h1>
+	<div class="row">
+	  <div class="col-md-6 col-md-offset-3">
+		<%= form_with(model: @item, local: true, html: { multipart: true }) do |f| %>
+			<%= render 'shared/error_messages', object: f.object %>
+
+			<%= f.label :name %><p class='mandatory'style='display: inline;'>*</p>         
+			<%= f.text_field :name, class: 'form-control',required: true%>
+
+		    <%= f.label :category %><p class='mandatory'style='display: inline;'>*</p>
+		    <%= f.select( :category_id, Category.all.collect {|c| [ c.name, (c.id)] }, { :selected => @profile_feed_id}, class: 'form-control',:onchange => "newCategory(this);") %>
+
+		    <div id='newCategoryDiv' style="display:none">
+		    <%= f.text_field :category, class: 'form-control'%>
+			</div>
+
+		    <%= f.label :price %><p class='mandatory'style='display: inline;'>*</p>
+		    <%= f.number_field :price, value: number_to_currency(f.object.price.to_f, delimiter: '', unit: ''), step: :any ,required: true, class: 'form-control'%>
+
+			<%= f.label :description %><p class='mandatory'style='display: inline;'>*</p>
+			<%= f.text_area :description, placeholder: "Enter the description...",required: true, class: 'form-control'%>
+
+			<span class="picture"><p class='mandatory'style='display: inline;'>*</p>
+				<%= f.file_field :picture , accept: 'image/jpeg,image/gif,image/png',required: true, class: 'form-control', onchange: "validateFiles(this);", data: { max_file_size: 5.megabytes } %>
+			</span>
+
+			<%= f.submit "Post for sale", class: "btn btn-primary" %>
+		<% end %>
+	  </div>
+	</div>
+<% else %>
+	<div class="alert alert-danger">
+    <strong>Pending Verification!</strong> The mobile number of this account hasn't been verified. Click <%= link_to "here", users_sendotp_path %> to verify your mobile number.
+    </div>
+<% end %>

@@ -1,0 +1,5 @@
+<%= form_with(url: static_pages_homefeed_path, method: :post) do |f| %>
+<%= f.select( :home_feed_id,  Category.all.collect {|c| [ c.name, (c.id)] } << ["All", 0], { :selected => @home_feed_id || 0  }, class: 'form-control')%>
+
+<%= f.submit "Filter", class: "btn btn-primary" %>
+<% end %>

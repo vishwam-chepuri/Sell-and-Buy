@@ -1,0 +1,19 @@
+
+<div>
+    <div class="loadmeRect">
+        <div class="loadmeRectChild loadmeRect1"></div>
+        <div class="loadmeRectChild loadmeRect2"></div>
+        <div class="loadmeRectChild loadmeRect3"></div>
+        <div class="loadmeRectChild loadmeRect4"></div>
+        <div class="loadmeRectChild loadmeRect5"></div>
+    </div>
+    <div class="loadme-mask"></div>
+</div>
+
+<div class='instructions' id='text' style='margin-top:40px;font:normal normal bold 35px/90px Georgia, serif;text-align: center;vertical-align: middle;line-height: 90px;'> 
+
+</div>
+
+<%= javascript_tag do %>
+     Item.getConnectionActivityStats("<%= items_purchase_path.html_safe %>", <%= @item.id %>);
+<% end %>

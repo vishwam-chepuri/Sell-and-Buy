@@ -1,0 +1,17 @@
+<% @user = User.find_by(id: session[:user_id]) %>
+<% if !logged_in? || @user.verified  %>
+<h1>Help</h1>
+<p>
+  Get help about this application here . If required contact the <a href="https://api.whatsapp.com/send?phone=#{admin.phone}&widget_hash=75698c0aa3b01bba00ffd5bc824aa29d" target="_blank"> Developer</a>.
+</p> 
+
+
+
+<% else %>
+
+<div class="alert alert-warning">
+	<strong>Nothing Here!</strong>  Click <%= link_to "here", root_url %> to redirect to home page.
+</div>
+
+
+<% end %>

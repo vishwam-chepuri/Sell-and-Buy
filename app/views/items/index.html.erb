@@ -1,0 +1,10 @@
+<% provide(:title, 'All Items') %>
+<% if logged_in? && !current_user.verified %>
+<div class="alert alert-danger">
+	<strong>Pending Verification!</strong> The mobile number of this account hasn't been verified. Click <%= link_to "here", users_sendotp_path %> to verify your mobile number.
+</div>
+<% else %>
+<div class="alert alert-warning">
+	<strong>Nothing Here!</strong>  Click <%= link_to "here", root_url %> to redirect to home page.
+</div>
+<% end %>

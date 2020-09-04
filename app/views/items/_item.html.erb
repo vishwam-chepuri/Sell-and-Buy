@@ -1,0 +1,38 @@
+<div>
+<div id="item-<%= item.id %>" class="row" >
+	<div  class="col-md-4 picture">
+		<%= image_tag (item.picture.url if item.picture?) , :class => "img-thumbnail"%>
+	</div>
+	<div style="" class="col-md-4 info">
+		<span class="name"><%= item.name %></span></br>
+		<span class="price"><label>Price: &nbsp</label><span>&#8377</span><%= item.price %></span></br>
+		<span class="category"><label>Category: &nbsp</label><%= item.category.name %></span></br>
+		<% if item.description? %>
+		<span class="description"><label>Description: &nbsp</label><%= item.description %></span>
+		<% end %>
+		<span class="timestamp">Posted <%= time_ago_in_words(item.created_at) %> ago.</span>
+		<span class="links">
+		<% if current_user?(item.seller.user) %>
+			<% if !(item.sold) %>
+			<%= link_to "Delete", item, method: :delete, data: { confirm: "You sure to delete?" } ,class: "btn btn-primary btn-sm"%>
+			<span>&nbsp</span>
+			<%= link_to "Edit", edit_item_path(item) , class: "btn btn-primary btn-sm"%>
+			<% end %>
+		<% else %>
+			<% if !(item.sold) %>
+			<%= link_to "Buy", items_buy_path(item_id: item.id), method: :post , class: "btn btn-primary btn-sm"%>
+			<% end %>
+			<span>&nbsp</span>
+			<% @user = User.find(item.seller.user_id) %>
+			<% @WHATS_LNK = "https://api.whatsapp.com/send?phone=#{@user.phone}&widget_hash=75698c0aa3b01bba00ffd5bc824aa29d&pre=1&text=I%20am%20interested%20in%20your%20product%20named%20#{item.name}%20which%20is%20posted%20#{time_ago_in_words(item.created_at)} ago." %>
+			<button class='btn btn-primary btn-sm show_details'>Show Seller Details</button>
+			<div class='details' style='display:none;margin:4px 0px 0px 10px;border-radius: 3px;padding:2px 0px 0px 8px'>
+				<%= link_to image_tag("whatsapp.svg", alt: "whatsapp logo", width: "20"), @WHATS_LNK, target: "_blank" %><span>&nbsp</span><%= @user.phone %><span>&nbsp</span><span>&nbsp</span><span>&nbsp</span><span class="glyphicon glyphicon-envelope"></span><span>&nbsp</span><span>&nbsp</span><%= @user.email %><span style='display: inline;'>&nbsp</span><span>&nbsp</span><span>&nbsp</span>
+			</div>
+		<% end %>
+	    </span>
+	</div>
+
+</div>
+</div>
+

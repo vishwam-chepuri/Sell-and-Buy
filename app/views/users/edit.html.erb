@@ -1,0 +1,35 @@
+<% provide(:title, "Edit user") %>
+<h1>Update your profile</h1>
+
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <%= form_with(model: @user, local: true) do |f| %>
+      <%= render 'shared/error_messages', object: f.object %>
+
+      <%= f.label :name %><p class='mandatory'style='display: inline;'>*</p> 
+      <%= f.text_field :name, class: 'form-control' %>
+
+      <%= f.label :email %><p class='mandatory'style='display: inline;'>*</p> 
+      <%= f.email_field :email, class: 'form-control' %>
+
+      <%= f.label :phone %><p class='mandatory'style='display: inline;'>*</p> 
+      <%= f.telephone_field :phone, class: 'form-control' %>
+
+      <%= f.label :address %>
+      <%= f.text_area :address, placeholder: "Address Here",  class: 'form-control' %>
+
+      <%= f.label :password %><p class='mandatory'style='display: inline;'>*</p> 
+      <%= f.password_field :password, class: 'form-control' , required: true%>
+
+      <%= f.label :password_confirmation, "Password Confirmation" %><p class='mandatory'style='display: inline;'>*</p> 
+      <%= f.password_field :password_confirmation, class: 'form-control', required: true %>
+
+      <span class="picture">
+        <%= f.label :picture %>
+        <%= f.file_field :picture , class: 'form-control', onchange: "validateFiles(this);", data: { max_file_size: 5.megabytes }%>
+      </span>
+
+      <%= f.submit "Save changes", class: "btn btn-primary " %>
+    <% end %>
+  </div>
+</div>

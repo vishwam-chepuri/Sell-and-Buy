@@ -1,0 +1,6 @@
+<%= form_with(url: users_profilefeed_path, method: :post) do |f| %>
+<%= f.select( :profile_feed_id, [["Unsold Items", 1],["Sold Items", 2],["Bought Items", 3]], { :selected => @profile_feed_id}, class: 'form-control' )%>
+
+<%= f.submit "Filter", class: "btn btn-primary" %>
+<% end %>
+

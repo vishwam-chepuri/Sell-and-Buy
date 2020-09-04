@@ -1,0 +1,29 @@
+
+<% if logged_in? %>
+	
+	<div class="row">
+		<aside class="col-md-3">
+	      <section>
+	      	<h2 style='float: left;margin-bottom: 17px;'>Select Category</h2>
+				<%= render 'shared/homefilter' %>
+		  </section>
+	    </aside>
+	    <div class="row">
+		    <div class="col-md-8">
+				<%= render 'shared/search' %>
+			</div></br>
+			<div class="col-md-8">
+				<%= render 'shared/feed' %>
+			</div>
+		</div>
+	</div>
+<% else %>
+	<div >
+		<div class="center jumbotron" style='background-image: url(/assets/background1.jpeg);width:auto;background-size: cover;padding-top: 5%;padding-bottom: 32%;border-radius: 20px;'>
+			<h3 style='margin-top: 10px;color: white;margin-bottom: 30px;font: italic small-caps bold 35px/30px Georgia, serif;'>Welcome to the Sell n Buy</h3>
+			<%= link_to "Register now!", signup_path, class: "btn btn-lg btn-primary" %>
+		</div>
+    </div>
+<% end %>
+
+

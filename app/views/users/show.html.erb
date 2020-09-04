@@ -1,0 +1,30 @@
+<% provide(:title, @user.name) %>
+<div class="row">
+	<aside class="col-md-3 user-info-cont">
+		<section >
+			<h1>
+			<%= image_tag (@user.picture.url if @user.picture?) ,width: '150', :class => "img-thumbnail"%></br>
+			</h1>
+			<h3><%= @user.name %></h3></br>
+			<span>
+				<span class="glyphicon glyphicon-earphone" style='display: inline;'></span><span style='display: inline;'>&nbsp</span><%= @user.phone %></br>
+			<span class="glyphicon glyphicon-envelope"></span><span style='display: inline;'>&nbsp</span><%= @user.email %> 
+		</section>
+		<% if current_user?(@user) %>
+		<section>
+			<%= render 'shared/filter' %>
+		</section>
+		<% end %>
+	</aside>
+	
+<div class="col-md-8">
+	<h3><%= @heading %>:<%= @items.count%></h3>
+	<% if @items.any? %>
+		<div class="container-fluid items">
+			<%= render @items %>
+		</div>
+		<%= will_paginate @items %>
+	<% else %> 
+		<h2 style="justify-content:center"> No items to show </h2>
+	<% end %>
+</div>		
